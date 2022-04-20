@@ -1,0 +1,29 @@
+{
+  "name": "sdc-qa",
+  "version": "1.0.0",
+  "description": "Backend server creation to support Question and Answers from FEC e-commerce API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NutmegGang/sdc-qa.git"
+  },
+  "keywords": [
+    "server",
+    "restfulApi",
+    "sql"
+  ],
+  "author": "Sabrina Gortz",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/NutmegGang/sdc-qa/issues"
+  },
+  "homepage": "https://github.com/NutmegGang/sdc-qa#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0"
+  }
+}

@@ -10,8 +10,12 @@ const pool = new Pool({
     database: process.env.DB
 })
 
-function test() {
-    return pool.query(`SELECT * FROM public.questions LIMIT 5`);
+/* Create a function to return all questions, answers and answer photos from a product id. 
+ * Filter out reported questions or answers  */
+function questions(limit) {
+    return pool.query(`SELECT * FROM public.questions LIMIT $1`, [limit]);
+    // figure out how to query for just one product id
+    // filter out reported questions and answers
 }
 
-module.exports = {pool , test};
+module.exports = { pool, questions };

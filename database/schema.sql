@@ -5,7 +5,7 @@ BEGIN;
 
 CREATE TABLE IF NOT EXISTS answers_photos
 (
-    id integer NOT NULL,
+    id serial NOT NULL,
     answer_id integer NOT NULL,
     url text NOT NULL,
     PRIMARY KEY (id)
@@ -13,33 +13,33 @@ CREATE TABLE IF NOT EXISTS answers_photos
 
 CREATE TABLE IF NOT EXISTS answers
 (
-    id integer NOT NULL,
+    answer_id serial NOT NULL,
     question_id integer NOT NULL,
-    body character varying(1000) NOT NULL,
+    answer_body character varying(1000) NOT NULL,
     date_written text NOT NULL,
     answerer_name character varying(60) NOT NULL,
     answerer_email character varying(60) NOT NULL,
     reported boolean NOT NULL DEFAULT false,
-    helpful integer NOT NULL DEFAULT 0,
-    PRIMARY KEY (id)
+    helpfulness integer NOT NULL DEFAULT 0,
+    PRIMARY KEY (answer_id)
 );
 
 CREATE TABLE IF NOT EXISTS questions
 (
-    id integer NOT NULL,
-    product_id integer NOT NULL,
-    body character varying(1000) NOT NULL,
+    question_id serial NOT NULL,
+    product_id text NOT NULL,
+    question_body character varying(1000) NOT NULL,
     date_written text NOT NULL,
     asker_name character varying(60) NOT NULL,
     asker_email character varying(60) NOT NULL,
     reported boolean NOT NULL DEFAULT false,
-    helpful integer NOT NULL DEFAULT 0,
-    PRIMARY KEY (id)
+    helpfulness integer NOT NULL DEFAULT 0,
+    PRIMARY KEY (question_id)
 );
 
 ALTER TABLE IF EXISTS answers_photos
     ADD FOREIGN KEY (answer_id)
-    REFERENCES answers (id) MATCH SIMPLE
+    REFERENCES answers (answer_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -47,7 +47,7 @@ ALTER TABLE IF EXISTS answers_photos
 
 ALTER TABLE IF EXISTS answers
     ADD FOREIGN KEY (question_id)
-    REFERENCES questions (id) MATCH SIMPLE
+    REFERENCES questions (question_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;

@@ -13,7 +13,6 @@ const {
 module.exports = {
   getQuestions: function (product_id, page, count, callback) {
     let limit = page * count;
-    // return testForGet(product_id, limit)
       return questionsList(product_id, limit)
       .then(response => {
         let output =  response.rows[0];
@@ -26,14 +25,20 @@ module.exports = {
       })
   },
 
-  getAnswers: function (product_id, page, count) {
+  getAnswers: function (product_id, page, count, callback) {
     let limit = page * count;
-    // answersList(product_id, limit)
-    // testForGet(product_id, limit)
-      // .then(response => {
-        // console.log('response from DB for answers ', response.rows)
-        // return response
-      // })
+    answersList(product_id, limit)
+      .then(response => {
+        let output = response.rows[0];
+        output.page = page;
+        output.count = count;
+        output.product_id = product_id;
+        callback(null, output);
+      })
+      .catch(err => {
+        console.error(err);
+        callback(err);
+      })
   },
 
   addQuestion: function (data, callback) {

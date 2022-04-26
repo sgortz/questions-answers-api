@@ -1,4 +1,5 @@
-const { testForGet, 
+const { 
+  testForGet, 
   questionsList, 
   answersList, 
   insertQuestion, 
@@ -6,7 +7,8 @@ const { testForGet,
   addHelpfulQuestion,
   addHelpfulAnswer, 
   markReportedQuestion,
-  markReportedAnswer } = require('../database/db.js');
+  markReportedAnswer 
+} = require('../database/db.js');
 
 module.exports = {
   getQuestions: function (product_id, page, count, callback) {

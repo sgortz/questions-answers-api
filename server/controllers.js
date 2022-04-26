@@ -1,11 +1,13 @@
-const { getQuestions, 
-  getAnswers, 
-  addQuestion, 
-  addAnswer, 
-  updateHelpfulQuestion, 
-  updateHelpfulAnswer, 
-  updateReportedQuestion, 
-  updateReportedAnswer } = require('./models.js');
+const {
+  getQuestions,
+  getAnswers,
+  addQuestion,
+  addAnswer,
+  updateHelpfulQuestion,
+  updateHelpfulAnswer,
+  updateReportedQuestion,
+  updateReportedAnswer
+} = require('./models.js');
 
 module.exports = {
   getAllQuestions: function (req, res) {
@@ -20,7 +22,18 @@ module.exports = {
     })
   },
 
-  getAllAnswers: function (req, res) { },
+  getAllAnswers: function (req, res) {
+    console.log('Answer list coming in!', req.params, req.query);
+    let { question_id } = req.params;
+    let { page, count } = req.query;
+    getAnswers(question_id, page, count, (err, response) => {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        res.status(200).send(response);
+      }
+    })
+  },
 
   postQuestion: function (req, res) {
     let info = req.body;
@@ -32,7 +45,7 @@ module.exports = {
         res.status(201).send(response);
       }
     });
-  }, //DONE
+  },
 
   postAnswer: function (req, res) {
     let info = req.body;
@@ -57,7 +70,7 @@ module.exports = {
         res.sendStatus(204);
       }
     });
-  }, //DONE BUT DOUBLE-CHECK
+  },
 
   helpfulAnswer: function (req, res) {
     let { answer_id } = req.params;
@@ -69,7 +82,7 @@ module.exports = {
         res.sendStatus(204);
       }
     });
-  }, //DONE BUT DOUBLE-CHECK (route)
+  },
 
   reportQuestion: function (req, res) {
     let { question_id } = req.params;
@@ -81,8 +94,8 @@ module.exports = {
         res.sendStatus(204);
       }
     });
-  }, //DONE
-  
+  },
+
   reportAnswer: function (req, res) {
     let { answer_id } = req.params;
 
@@ -93,6 +106,5 @@ module.exports = {
         res.sendStatus(204);
       }
     });
-  }, //DONE
-
+  }
 }

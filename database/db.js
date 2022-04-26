@@ -22,7 +22,8 @@ module.exports = {
     // insert page property (here?)
     // insert count property (here?)
     // remove all reported answers
-    return pool.query(`SELECT * FROM answers WHERE question_id = $1 LIMIT $2`, [question_id, limit]);
+    // return pool.query(`SELECT * FROM answers WHERE question_id = $1 LIMIT $2`, [question_id, limit]);
+    return pool.query(`SELECT ARRAY_AGG(answers_photos.url) AS photos FROM answers_photos WHERE answer_id = '5'`);
   },
 
   insertQuestion: function (body, name, email, product_id, date) {
@@ -50,7 +51,7 @@ module.exports = {
   },
  
   markReportedAnswer: function (answer_id) {
-    return pool.query(`UPDATE answers SET reported = true WHERE answer = $1`, [answer_id]);
+    return pool.query(`UPDATE answers SET reported = true WHERE answer_id = $1`, [answer_id]);
   },
 
   testForGet: function (product_id) {

@@ -16,12 +16,7 @@ module.exports = {
   },
 
   answersList: function (question_id, limit) {
-    // aggregate answers_photos to answers table using answer id
-    // insert page property (here?)
-    // insert count property (here?)
-    // remove all reported answers
-    // return pool.query(`SELECT * FROM answers WHERE question_id = $1 LIMIT $2`, [question_id, limit]);
-    return pool.query(`SELECT ARRAY_AGG(answers_photos.url) AS photos FROM answers_photos WHERE answer_id = '5'`);
+    return pool.query(`SELECT json_agg(results) as results FROM (SELECT answers.answer_id, answers.answer_body AS body, answers.date_written AS date, answers.answerer_name, answers.helpfulness, (SELECT json_agg(photos) as photos FROM (SELECT answers_photos.url FROM answers_photos WHERE answers_photos.answer_id = answers.answer_id AND answers.reported = false) as photos) FROM answers WHERE question_id = $1 LIMIT $2) as results`, [question_id, limit]);
   },
 
   insertQuestion: function (body, name, email, product_id, date) {

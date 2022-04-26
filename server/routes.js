@@ -11,8 +11,8 @@ const {
 } = require('./controllers.js');
 
 // GET - Question and Answer data for a single product
-router.get('/qa/questions', getAllQuestions);
-router.get('/qa/questions/:question_id/answers', getAllAnswers);
+router.get('/qa/questions', getAllQuestions); //DONE
+router.get('/qa/questions/:question_id/answers', getAllAnswers); //DONE
 router.post('/qa/questions', postQuestion); //DONE
 router.post('/qa/answers/:question_id/answers', postAnswer); //DONE
 router.put('/qa/questions/:question_id/helpful', helpfulQuestion); //DONE

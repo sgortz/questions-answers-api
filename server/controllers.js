@@ -24,6 +24,7 @@ module.exports = {
 
   getAllAnswers: function (req, res) {
     console.log('Answer list coming in!', req.params, req.query);
+    
     let { question_id } = req.params;
     let { page, count } = req.query;
     getAnswers(question_id, page, count, (err, response) => {

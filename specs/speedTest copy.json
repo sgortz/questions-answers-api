@@ -1,0 +1,58 @@
+{
+  "config": {
+    "target": "http://localhost:3005",
+    "phases": [
+      {
+        "duration": 60,
+        "arrivalRate": 5,
+        "name": "Warm up"
+      },
+      {
+        "duration": 120,
+        "arrivalRate": 5,
+        "rampTo": 50,
+        "name": "Warm up"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "flow": [
+        {
+          "get": {
+            "url": "/qa/questions/?product_id=37311"
+          }
+        },
+        {
+          "get": {
+            "url": "/qa/questions/131217/answers"
+          }
+        },
+        {
+          "post": {
+            "url": "/qa/questions",
+            "json": {
+              "body": "Can I finance this and for how long?",
+              "name": "Struggling Student",
+              "email": "goodmorning@hello.com",
+              "product_id": 37311
+            }
+          }
+        },
+        {
+          "post": {
+            "url": "/qa/answers/3518973/answers",
+            "json": {
+              "body": "Never heard of it, but that interests me too! :D",
+              "name": "Another struggling student",
+              "email": "goodmorning@hello.com",
+              "photos": [
+                "https://www.himgs.com/imagenes/hello/social/hello-fb-logo.png"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

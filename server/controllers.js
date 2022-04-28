@@ -11,7 +11,9 @@ const {
 
 module.exports = {
   getAllQuestions: function (req, res) {
-    let { product_id, page, count } = req.query;
+    let { product_id } = req.query;
+    let page = req.query.page || 1;
+    let count = req.query.count || 5;
 
     getQuestions(product_id, page, count, (err, response) => {
       if (err) {
@@ -23,10 +25,10 @@ module.exports = {
   },
 
   getAllAnswers: function (req, res) {
-    console.log('Answer list coming in!', req.params, req.query);
-    
     let { question_id } = req.params;
-    let { page, count } = req.query;
+    let page = req.query.page || 1;
+    let count = req.query.count || 5;
+
     getAnswers(question_id, page, count, (err, response) => {
       if (err) {
         res.sendStatus(500);
@@ -54,6 +56,7 @@ module.exports = {
 
     addAnswer(info, question_id, (err, response) => {
       if (err) {
+        console
         res.sendStatus(500);
       } else {
         res.status(201).send(response);

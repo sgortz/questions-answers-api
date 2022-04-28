@@ -1,0 +1,23 @@
+{
+  "config": {
+    "target": "http://localhost:3005",
+    "phases": [
+      {
+        "duration": 40,
+        "arrivalRate": 500,
+        "name": "Warm up"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "flow": [
+        {
+          "get": {
+            "url": "/qa/questions/?product_id=37311"
+          }
+        }
+      ]
+    }
+  ]
+}

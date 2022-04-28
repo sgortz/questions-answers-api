@@ -13,7 +13,7 @@ const {
 module.exports = {
   getQuestions: function (product_id, page, count, callback) {
     let limit = page * count;
-      return questionsList(product_id, limit)
+      questionsList(product_id, limit)
       .then(response => {
         let output =  response.rows[0];
         output.product_id = product_id;
@@ -25,14 +25,14 @@ module.exports = {
       })
   },
 
-  getAnswers: function (product_id, page, count, callback) {
+  getAnswers: function (question_id, page, count, callback) {
     let limit = page * count;
-    answersList(product_id, limit)
+    answersList(question_id, limit)
       .then(response => {
         let output = response.rows[0];
         output.page = page;
         output.count = count;
-        output.product_id = product_id;
+        output.question_id = question_id;
         callback(null, output);
       })
       .catch(err => {

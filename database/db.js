@@ -16,7 +16,10 @@ module.exports = {
   },
 
   answersList: function (question_id, limit) {
-    return pool.query(`SELECT json_agg(results) as results FROM (SELECT answers.answer_id, answers.answer_body AS body, answers.date_written AS date, answers.answerer_name, answers.helpfulness, (SELECT json_agg(photos) as photos FROM (SELECT answers_photos.url FROM answers_photos WHERE answers_photos.answer_id = answers.answer_id AND answers.reported = false) as photos) FROM answers WHERE question_id = $1 LIMIT $2) as results`, [question_id, limit]);
+    return pool.query(`SELECT json_agg(results) as results FROM (
+      SELECT answers.answer_id, answers.answer_body AS body, answers.date_written AS date, answers.answerer_name, answers.helpfulness, (
+        SELECT json_agg(photos) as photos FROM (
+          SELECT answers_photos.url FROM answers_photos WHERE answers_photos.answer_id = answers.answer_id AND answers.reported = false) as photos) FROM answers WHERE question_id = $1 LIMIT $2) as results`, [question_id, limit]);
   },
 
   insertQuestion: function (body, name, email, product_id, date) {

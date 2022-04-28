@@ -49,10 +49,7 @@ FROM
 \ COPY answers_photos
 FROM
   '/Users/sgortz/Downloads/SDC CSV/answers_photos.csv' DELIMITERS ',' CSV header;
-SELECT
-  setval('answer_photo_id_seq', max(id))
-FROM
-  answers_photos;
+SELECT setval('answer_photo_id_seq', max(id)) FROM answers_photos;
 ALTER TABLE
   IF EXISTS answers_photos
 ADD
@@ -61,8 +58,13 @@ ALTER TABLE
   IF EXISTS answers
 ADD
   FOREIGN KEY (question_id) REFERENCES questions (question_id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION NOT VALID;
+CREATE INDEX product_id_idx ON questions(product_id);
+CREATE INDEX question_id_idx ON questions(question_id);
+CREATE INDEX question_id_answers_idx ON answers (question_id);
+CREATE INDEX answer_id_idx ON answers(answer_id);
+CREATE INDEX answer_id_photos_idx ON answers_photos(answer_id);
+CREATE INDEX answer_photos_id_idx ON answers_photos(id);
 END;
 --SELECT jsonb_agg(photos) FROM (SELECT answers_photos.url FROM answers_photos WHERE answer_id = '5') AS photos;
-
 --outputs a object of strings:
 --SELECT ARRAY_AGG(answers_photos.url) AS photos FROM answers_photos WHERE answer_id = '5';

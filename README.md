@@ -12,7 +12,7 @@ Each member of the team was responsible for implementing different services of t
 
 ## Questions and Answers API
 
-This RESTful API handles of questions and answers submitted by the customers about a specific product being displayed on the page. It also handles uploads of photos by users when answering questions, as well as keeping track of helpfulness votes and being able to report a question or an answer, which in this case deletes the entry from the database. 
+This RESTful API handles questions and answers submitted by the customers about a specific product being displayed on the page. It also handles uploads of photos by users when answering questions, as well as keeping track of helpfulness votes and being able to report a question or an answer, which in this case deletes the entry from the database. 
 
 The database schema are contained in `/database`
 
